@@ -1,7 +1,7 @@
 # Dockerfile with tensorflow gpu support on python3, opencv3.3.0
 FROM tensorflow/tensorflow:1.4.1-gpu
 
-MAINTAINER actonton <whenyd@126.com>
+MAINTAINER whenyd <whenyd@126.com>
 
 RUN apt-get update
 
