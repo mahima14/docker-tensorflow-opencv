@@ -1,11 +1,7 @@
-# Dockerfile with tensorflow gpu support on python2, opencv3.3
+# Dockerfile with tensorflow gpu support on python3, opencv3.3
 FROM tensorflow/tensorflow:1.4.1-gpu
 
 MAINTAINER actonton <whenyd@126.com>
-
-# The code below is all based off the repos made by https://github.com/janza/
-# He makes great dockerfiles for opencv, I just used a different base as I need
-# tensorflow on a gpu.
 
 RUN apt-get update
 
@@ -41,11 +37,8 @@ RUN apt-get install -y \
 # postgresql
 # libpq-dev
 
-# python2.7 development headers and libraries
-# python2.7-dev
-
 # Python dependencies
-RUN pip --no-cache-dir install \
+RUN pip3 --no-cache-dir install \
     numpy \
     hdf5storage \
     h5py \
@@ -77,12 +70,10 @@ RUN wget https://github.com/opencv/opencv/archive/3.3.0.zip \
     -DBUILD_TESTS=OFF \
     -DBUILD_PERF_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=RELEASE \
-    -DCMAKE_INSTALL_PREFIX=$(python -c "import sys; print sys.prefix") \
-    -DPYTHON_EXECUTABLE=$(which python) \
-    -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print get_python_inc()") \
-    -DPYTHON_PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()") .. \
-    # make -j4 &&\ 
-    # make install &&\
+    -DCMAKE_INSTALL_PREFIX=$(python3 -c "import sys; print sys.prefix") \
+    -DPYTHON_EXECUTABLE=$(which python3) \
+    -DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print get_python_inc()") \
+    -DPYTHON_PACKAGES_PATH=$(python3 -c "from distutils.sysconfig import get_python_lib; print get_python_lib()") .. \
     && make install \
     && rm /3.3.0.zip \
     && rm -r /opencv-3.3.0 \
