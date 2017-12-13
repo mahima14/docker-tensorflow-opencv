@@ -69,7 +69,7 @@ RUN wget https://github.com/opencv/opencv/archive/3.3.0.zip \
     -DWITH_OPENGL=ON \
     -DWITH_OPENCL=ON \
     # cannot download ippicv
-    -DWITH_IPP=OFF \
+    -DWITH_IPP=ON \
     -DWITH_TBB=ON \
     -DWITH_EIGEN=ON \
     -DWITH_V4L=ON \
