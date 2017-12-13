@@ -79,16 +79,10 @@ RUN wget https://github.com/opencv/opencv/archive/3.3.0.zip \
     -DCMAKE_INSTALL_PREFIX=$(python -c "import sys; print sys.prefix") \
     -DPYTHON_EXECUTABLE=$(which python) \
     -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print get_python_inc()") \
-    -DPYTHON_PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()") .. &&\      -D WITH_VTK=ON \
-    make -j4 &&\
+    -DPYTHON_PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()") .. &&\
     make install &&\
     rm /3.3.0.zip &&\
     rm -r /opencv-3.3.0 &&\
     ldconfig
-
-# Clean the install from sources
-# cd / &&\
-# rm -r /opencv &&\
-# rm -r /opencv_contrib
 
 CMD ["/bin/bash"]
