@@ -20,7 +20,6 @@ RUN apt-get install -y \
     unzip \
     yasm \
     pkg-config \
-    apt-utils \
 
     # image formats support
     libtbb2 \
@@ -29,6 +28,7 @@ RUN apt-get install -y \
     libpng-dev \
     libtiff-dev \
     libjasper-dev \
+    libhdf5-dev \
 
     # video formats support
     libavcodec-dev \
@@ -36,10 +36,10 @@ RUN apt-get install -y \
     libswscale-dev \
     libv4l-dev \
     libxvidcore-dev \
+    libx264-dev
 
-    libx264-dev \
-    libhdf5-dev \
-    libpq-dev
+# postgresql
+# libpq-dev
 
 # python2.7 development headers and libraries
 # python2.7-dev
@@ -53,6 +53,7 @@ RUN pip --no-cache-dir install \
     keras
 
 WORKDIR /
+
 RUN wget https://github.com/opencv/opencv_contrib/archive/3.3.0.zip \
     && unzip 3.3.0.zip \
     && rm 3.3.0.zip
@@ -80,6 +81,8 @@ RUN wget https://github.com/opencv/opencv/archive/3.3.0.zip \
     -DPYTHON_EXECUTABLE=$(which python) \
     -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print get_python_inc()") \
     -DPYTHON_PACKAGES_PATH=$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()") .. \
+    # make -j4 &&\ 
+    # make install &&\
     && make install \
     && rm /3.3.0.zip \
     && rm -r /opencv-3.3.0 \
