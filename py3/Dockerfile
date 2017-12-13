@@ -35,7 +35,7 @@ RUN apt-get install -y \
     libx264-dev
 
 # Python dependencies
-RUN pip3 --no-cache-dir install \
+RUN pip --no-cache-dir install \
     numpy \
     hdf5storage \
     h5py \
